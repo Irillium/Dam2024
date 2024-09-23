@@ -22,10 +22,6 @@ class MovieActivity : AppCompatActivity() {
         Log.d("@dev", movies.toString())
     }
 
-
-    override fun onStart() {
-        super.onStart()
-    }
 }
 
 //Log.d("MainActivity", "Mensaje para el Logcat")
