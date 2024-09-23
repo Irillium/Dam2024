@@ -16,4 +16,13 @@ class MovieMockRemoteDataSource {
             Movie(title = "title4", id = "4", poster = "poster4")
         )
     }
+    fun getMovie(id:String):Movie?{
+        val movies:List<Movie> = getMovies()
+      for (movie in movies){
+          if (movie.id==id){
+              return movie
+          }
+      }
+        return null
+    }
 }
