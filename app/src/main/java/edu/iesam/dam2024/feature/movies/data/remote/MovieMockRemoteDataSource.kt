@@ -16,13 +16,19 @@ class MovieMockRemoteDataSource {
             Movie(title = "title4", id = "4", poster = "poster4")
         )
     }
-    fun getMovie(id:String):Movie?{
+    fun getMovie(movieId:String):Movie?{
         val movies:List<Movie> = getMovies()
       for (movie in movies){
-          if (movie.id==id){
+          if (movie.id==movieId){
               return movie
           }
       }
         return null
     }
+    // Chema lo ha hecho así:
+    // fun getMovie(id:String):Movie?{
+    // return movies.firstOrNull{movie -> movie.id==id)}
+    //}
+    // supuestamente el metodo .firstOrNull indica que se devuelve
+    // el primero que coincida con la condicion o un nulo en su defecto
 }
