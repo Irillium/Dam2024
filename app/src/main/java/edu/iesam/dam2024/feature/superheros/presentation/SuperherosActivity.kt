@@ -20,16 +20,16 @@ class SuperherosActivity : AppCompatActivity() {
 
     }
 
-    private fun bindData(heros:List<Superhero>){
-        blockHero(heros[0], R.id.hero_id_1,R.id.hero_name_1,R.id.hero_layout_1)
-        blockHero(heros[1], R.id.hero_id_2,R.id.hero_name_2,R.id.hero_layout_2)
-        blockHero(heros[2], R.id.hero_id_3,R.id.hero_name_3,R.id.hero_layout_3)
+    private fun bindData(heroes:List<Superhero>){
+        blockHero(heroes[0], R.id.hero_id_1,R.id.hero_name_1,R.id.hero_layout_1)
+        blockHero(heroes[1], R.id.hero_id_2,R.id.hero_name_2,R.id.hero_layout_2)
+        blockHero(heroes[2], R.id.hero_id_3,R.id.hero_name_3,R.id.hero_layout_3)
     }
-    private fun blockHero(hero:Superhero,nId:Int, nName:Int, nLayout:Int ){
-        findViewById<TextView>(nId).text =hero.id
-        findViewById<TextView>(nName).text = hero.name
+    private fun blockHero(heroes:Superhero,nId:Int, nName:Int, nLayout:Int ){
+        findViewById<TextView>(nId).text =heroes.id
+        findViewById<TextView>(nName).text = heroes.name
         findViewById<LinearLayout>(nLayout).setOnClickListener{
-            val hero1:Superhero?=viewModel.itemSelected(hero.id)
+            val hero1:Superhero?=viewModel.itemSelected(heroes.id)
             hero1?.let {
                 Log.d("@hero", "Superheroe seleccionado: ${it.name}")
             }
