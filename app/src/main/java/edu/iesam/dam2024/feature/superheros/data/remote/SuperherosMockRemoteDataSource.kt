@@ -14,7 +14,7 @@ class SuperherosMockRemoteDataSource {
     fun getSuperheros(): List<Superhero>{
         return listOf(
             Superhero(
-                id = "2",
+                id = "1",
                 name = "Superman",
                 slug = "2-superman",
                 powerstats = Powerstats(

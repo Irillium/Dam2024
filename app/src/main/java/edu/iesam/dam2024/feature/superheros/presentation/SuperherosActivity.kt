@@ -13,7 +13,7 @@ class SuperherosActivity : AppCompatActivity() {
     private val viewModel = superheroFactory.buildViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_superheroes)//esto se cambia segun la pantalla que se desea mostrar
 
         val superheros = viewModel.viewCreated()
         bindData(superheros)
