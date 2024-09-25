@@ -2,27 +2,41 @@ package edu.iesam.dam2024.feature.movies.presentation
 
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import edu.iesam.dam2024.R
-import edu.iesam.dam2024.feature.movies.data.MovieDataRepository
-import edu.iesam.dam2024.feature.movies.data.remote.MovieMockRemoteDataSource
-import edu.iesam.dam2024.feature.movies.domain.GetMoviesUseCase
+import edu.iesam.dam2024.feature.movies.domain.Movie
 
 class MovieActivity : AppCompatActivity() {
 
     private val movieFactory : MovieFactory = MovieFactory()
+    private val viewModel = movieFactory.buildViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val viewModel = movieFactory.buildViewModel()
+
         val movies = viewModel.viewCreated()
-        Log.d("@dev", "Hi!!")
-        Log.d("@dev", movies.toString())
+        bindData(movies)
     }
+    private fun bindData(movies:List<Movie>){
 
+        blockMovie(movies[0],R.id.movie_id_1,R.id.movie_title_1,R.id.movie_layout_1)
+        blockMovie(movies[1],R.id.movie_id_2,R.id.movie_title_2,R.id.movie_layout_2)
+        blockMovie(movies[2],R.id.movie_id_3,R.id.movie_title_3,R.id.movie_layout_3)
+        blockMovie(movies[3],R.id.movie_id_4,R.id.movie_title_4,R.id.movie_layout_4)
+
+    }
+    private fun blockMovie(movie:Movie, nId:Int, nTitle:Int, nLayout:Int ){
+        findViewById<TextView>(nId).text = movie.id
+        findViewById<TextView>(nTitle).text = movie.title
+        findViewById<LinearLayout>(nLayout).setOnClickListener{
+            val movie1: Movie? =viewModel.itemSelected(movie.id)
+            movie1?.let {
+                Log.d("@dev","Pelicula seleccionada: ${it.title}" )//imprime solo el titulo
+                // y se usa it para confirmar que es el objeto pasado por el filtro
+            } ?: Log.d("@dev","Pelicula no encontrada")
+        }
+    }
 }
-
-//Log.d("MainActivity", "Mensaje para el Logcat")
-//Log.d("MainActivity", "NIANIA")
