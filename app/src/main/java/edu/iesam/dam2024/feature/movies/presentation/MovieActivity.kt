@@ -6,9 +6,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import edu.iesam.dam2024.R
+import edu.iesam.dam2024.feature.movies.data.local.MovieXmlLocalDataSource
 import edu.iesam.dam2024.feature.movies.domain.Movie
 
-class MovieActivity : AppCompatActivity() {
+class MovieActivity : AppCompatActivity() { //MoviActivity hereda de Context
 
     private val movieFactory : MovieFactory = MovieFactory()
     private val viewModel = movieFactory.buildViewModel()
@@ -19,6 +20,7 @@ class MovieActivity : AppCompatActivity() {
 
         val movies = viewModel.viewCreated()
         bindData(movies)
+        textXml()
     }
     private fun bindData(movies:List<Movie>){
 
@@ -38,5 +40,15 @@ class MovieActivity : AppCompatActivity() {
                 // y se usa it para confirmar que es el objeto pasado por el filtro
             } ?: Log.d("@dev","Pelicula no encontrada")
         }
+    }
+
+    private fun textXml(){
+        val xmlDataSource = MovieXmlLocalDataSource(this) //this se refiere a MovieActivity
+        val movie=viewModel.itemSelected("1")
+        movie?.let {
+            xmlDataSource.save(it)
+        }
+        val movieSaved = xmlDataSource.findMovie()
+        Log.d("@dev",movieSaved.toString())
     }
 }
