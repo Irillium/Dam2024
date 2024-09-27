@@ -9,18 +9,23 @@ import edu.iesam.dam2024.R
 import edu.iesam.dam2024.feature.movies.data.local.MovieXmlLocalDataSource
 import edu.iesam.dam2024.feature.movies.domain.Movie
 
-class MovieActivity : AppCompatActivity() { //MoviActivity hereda de Context
+class MovieActivity : AppCompatActivity() {
 
-    private val movieFactory : MovieFactory = MovieFactory()
-    private val viewModel = movieFactory.buildViewModel()
+    private lateinit var movieFactory: MovieFactory
+    private lateinit var viewModel : MovieViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        movieFactory = MovieFactory(this)
+        viewModel = movieFactory.buildViewModel()
+
         val movies = viewModel.viewCreated()
         bindData(movies)
-        textXml()
+        viewModel.itemSelected(movies.first().id) //Simular un click sobre un item
+        //testXml()
+        testListXml()
     }
     private fun bindData(movies:List<Movie>){
 
@@ -48,7 +53,16 @@ class MovieActivity : AppCompatActivity() { //MoviActivity hereda de Context
         movie?.let {
             xmlDataSource.save(it)
         }
-        val movieSaved = xmlDataSource.findMovie()
+        val movieSaved = xmlDataSource.find("1")
         Log.d("@dev",movieSaved.toString())
+
+    }
+    private fun testListXml(){
+        val movies =viewModel.viewCreated()
+        val xmlDataSource = MovieXmlLocalDataSource(this)
+        xmlDataSource.saveAll(movies)
+
+        val moviesFromXml= xmlDataSource.findAll()
+        Log.d("@dev", moviesFromXml.toString())
     }
 }
