@@ -29,7 +29,7 @@ class MovieDataRepository (
                 local.save(remoteMovie)
                 return remoteMovie
             }
-            return remoteMovie
+            return null
         }
         return localMovie
     }

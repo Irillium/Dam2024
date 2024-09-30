@@ -6,14 +6,19 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import edu.iesam.dam2024.R
+import edu.iesam.dam2024.feature.movies.presentation.MovieFactory
 import edu.iesam.dam2024.feature.superheros.domain.Superhero
 
 class SuperherosActivity : AppCompatActivity() {
-    private val superheroFactory : SuperheroFactory= SuperheroFactory()
-    private val viewModel = superheroFactory.buildViewModel()
+    private lateinit var superheroFactory : SuperheroFactory
+    private lateinit var viewModel: SuperherosViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_superheroes)//esto se cambia segun la pantalla que se desea mostrar
+
+        superheroFactory = SuperheroFactory(this)
+        viewModel = superheroFactory.buildViewModel()
+
 
         val superheros = viewModel.viewCreated()
         bindData(superheros)

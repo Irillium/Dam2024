@@ -1,32 +1,52 @@
 package edu.iesam.dam2024.feature.superheros.data.local
 
 import android.content.Context
+import com.google.gson.Gson
+
 import edu.iesam.dam2024.feature.superheros.domain.Superhero
 
 class SuperheroXmlLocalDataSource (private val context: Context){
     private val sharedPref = context.getSharedPreferences(
         "superheros", Context.MODE_PRIVATE)
-    fun save(superhero: Superhero){
+    private val gson= Gson()
+
+    fun save(superhero: Superhero ){
         sharedPref.edit().apply{
-            putString("id", superhero.id)
-            putString("name",superhero.name)
+            putString(superhero.id,gson.toJson(superhero))
             apply()
         }
+
+
     }
 
-    fun find(idHero:String):Superhero?{
-        sharedPref.apply {
-            val id = getString("${idHero}_id", null)
-            val name = getString("${idHero}_name", null)
+    fun saveAll(superheros: List<Superhero>){
+        sharedPref.edit().apply {
+            superheros.forEach{ superhero ->
+                putString(superhero.id,gson.toJson(superhero))
+            }
+            apply()
+        }
 
-            return if (id != null && name != null) {
-                Superhero(id, name)
-            } else {
-                null
+    }
+    fun find(id: String) : Superhero?{
+        val mapSuperheros = sharedPref.all //as Map< String, String>
+        mapSuperheros.values.forEach{jsonSuperhero ->
+            val superhero= gson.fromJson(jsonSuperhero as String, Superhero::class.java)
+            if (superhero.id == id){
+                return superhero
             }
         }
+        return null
     }
-
+    fun findAll():List<Superhero>{
+        val superheros= ArrayList<Superhero>()
+        val mapSuperheros = sharedPref.all //as Map< String, String>
+        mapSuperheros.values.forEach{jsonSuperhero ->
+            val superhero= gson.fromJson(jsonSuperhero as String, Superhero::class.java)
+            superheros.add(superhero)
+        }
+        return superheros
+    }
     fun delete(){
         sharedPref.edit().clear().apply()
     }

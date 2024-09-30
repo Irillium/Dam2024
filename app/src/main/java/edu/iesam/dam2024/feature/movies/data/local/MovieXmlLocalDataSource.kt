@@ -9,16 +9,22 @@ class MovieXmlLocalDataSource (private val context: Context){
         "movies", Context.MODE_PRIVATE )//MODE_PRIVATE significa que tiene poco privado, opsea que no es accesible
     private val gson=Gson()
     fun save(movie:Movie){
-        val editor = sharedPref.edit()
-            editor.putString(movie.id,gson.toJson(movie))
+       sharedPref.edit().apply{
+            putString(movie.id,gson.toJson(movie))
+            apply()
+        }
+
 
     }
 
     fun saveAll(movies: List<Movie>){
-        val editor = sharedPref.edit()
-        movies.forEach{ movie ->
-            editor.putString(movie.id,gson.toJson(movie))
+       sharedPref.edit().apply {
+            movies.forEach{ movie ->
+               putString(movie.id,gson.toJson(movie))
+            }
+            apply()
         }
+
     }
     fun find(id: String) : Movie?{
         val mapMovies = sharedPref.all //as Map< String, String>
