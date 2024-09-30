@@ -6,7 +6,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import edu.iesam.dam2024.R
-import edu.iesam.dam2024.feature.movies.presentation.MovieFactory
 import edu.iesam.dam2024.feature.superheros.domain.Superhero
 
 class SuperherosActivity : AppCompatActivity() {
