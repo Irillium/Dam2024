@@ -19,16 +19,16 @@
             android:exported="false" />
         <activity
             android:name=".feature.movies.presentation.MovieActivity"
-            android:exported="false" />
-        <activity
-            android:name=".feature.superheros.presentation.SuperherosActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".feature.superheros.presentation.SuperherosActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

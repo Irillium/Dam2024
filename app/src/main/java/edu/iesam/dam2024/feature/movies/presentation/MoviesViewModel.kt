@@ -7,5 +7,6 @@ import edu.iesam.dam2024.feature.movies.domain.Movie
 class MoviesViewModel(private val getMoviesUseCase: GetMoviesUseCase):ViewModel() {
     fun viewCreated():List<Movie> {
         return  getMoviesUseCase.invoke()
+
     }
 }

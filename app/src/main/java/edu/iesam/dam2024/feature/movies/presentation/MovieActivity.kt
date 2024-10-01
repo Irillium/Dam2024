@@ -1,8 +1,7 @@
 package edu.iesam.dam2024.feature.movies.presentation
 
-import android.content.Intent
+
 import android.os.Bundle
-import android.provider.Telephony.Mms.Intents
 import android.util.Log
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -25,9 +24,6 @@ class MovieActivity : AppCompatActivity() {
 
         val movies = viewModel.viewCreated()
         bindData(movies)
-        //viewModel.itemSelected(movies.first().id) //Simular un click sobre un item
-        //textXml()
-        //testListXml()
     }
 
     private fun bindData(movies: List<Movie>) {
@@ -47,37 +43,6 @@ class MovieActivity : AppCompatActivity() {
         }
     }
 
-    private fun textXml() {
-        val xmlDataSource = MovieXmlLocalDataSource(this) //this se refiere a MovieActivity
-        val movies: List<Movie> = listOf(
-            Movie("5", "title_5", "poster_5"),
-            Movie("6", "title_6", "poster_6"),
-            Movie("7", "title_7", "poster_7"),
-            Movie("8", "title_8", "poster_8")
-        )
-        val movie: Movie = Movie("9", "title_9", "poster_9")
-        xmlDataSource.saveAll(movies)
-        xmlDataSource.save(movie)
-        val m1 = xmlDataSource.findById("7")
-        Log.d("@dev", "${m1.toString()}")
-        val m2 = xmlDataSource.findById("9")
-        Log.d("@dev", "${m2.toString()}")
-        //xmlDataSource.findAll()
-        //xmlDataSource.deleteById("6")
-        //xmlDataSource.findAll()
-        //xmlDataSource.delete()
-        //xmlDataSource.findAll()
-
-    }
-
-    private fun testListXml() {
-        val movies = viewModel.viewCreated()
-        val xmlDataSource = MovieXmlLocalDataSource(this)
-        xmlDataSource.saveAll(movies)
-
-        val moviesFromXml = xmlDataSource.findAll()
-        Log.d("@dev", moviesFromXml.toString())
-    }
 
     private fun navigateToMovieDetail(movieId: String) {
         startActivity(MovieDetailActivity.getIntent(this,movieId))
