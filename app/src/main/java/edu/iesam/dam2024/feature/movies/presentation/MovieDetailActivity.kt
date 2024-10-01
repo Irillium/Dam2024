@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import edu.iesam.dam2024.R
 import edu.iesam.dam2024.feature.movies.domain.Movie
+import com.bumptech.glide.Glide
 
 class MovieDetailActivity : AppCompatActivity() {
 
