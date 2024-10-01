@@ -3,6 +3,7 @@ package edu.iesam.dam2024.feature.movies.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import edu.iesam.dam2024.R
 import edu.iesam.dam2024.feature.movies.domain.Movie
@@ -30,7 +31,8 @@ class MovieDetailActivity : AppCompatActivity() {
         return intent.getStringExtra(KEY_MOVIE_ID)
     }
     private fun binData(movie:Movie){
-
+        val imageView = findViewById<ImageView>(R.id.poster)
+        Glide.with(this).load(movie).into(imageView)
     }
     companion object {
         val KEY_MOVIE_ID= "key_movie_id"

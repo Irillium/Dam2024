@@ -6,5 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".feature.movies.presentation.MovieDetailActivity">
-
+<ImageView
+    android:id="@+id/poster"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:src=""></ImageView>
 </androidx.constraintlayout.widget.ConstraintLayout>

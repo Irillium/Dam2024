@@ -43,7 +43,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.gson.serializer)
-
+    implementation(libs.glide)
     //librerias para testing
     testImplementation(libs.junit)
     //librerias para Android-testing(test que hagan referencia al sdk de android)
