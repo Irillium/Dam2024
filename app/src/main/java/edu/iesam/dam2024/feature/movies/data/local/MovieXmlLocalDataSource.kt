@@ -26,21 +26,10 @@ class MovieXmlLocalDataSource (private val context: Context){
         }
 
     }
-    fun find(id: String) : Movie?{
-        val mapMovies = sharedPref.all //as Map< String, String>
-        mapMovies.values.forEach{jsonMovie ->
-            val movie= gson.fromJson(jsonMovie as String, Movie::class.java)
-            if (movie.id == id){
-                return movie
-            }
+    fun findById(id: String) : Movie?{
+        return sharedPref.getString(id, null)?.let { movie ->
+            gson.fromJson(movie, Movie::class.java)
         }
-        return null
-        /*sharedPref.apply {
-            return  Movie(
-                getString("id","")!!,
-                getString("title","")!!,
-                getString("poster","")!!)//!! es forzar que lo use a riesgo de que sea nulo
-        }*/
     }
     fun findAll():List<Movie>{
         val movies= ArrayList<Movie>()
@@ -53,5 +42,8 @@ class MovieXmlLocalDataSource (private val context: Context){
     }
     fun delete(){
         sharedPref.edit().clear().apply()
+    }
+    fun deleteById(movieId: String){
+        sharedPref.edit().remove(movieId).commit()
     }
 }

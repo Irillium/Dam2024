@@ -21,11 +21,11 @@ class MovieActivity : AppCompatActivity() {
         movieFactory = MovieFactory(this)
         viewModel = movieFactory.buildViewModel()
 
-        val movies = viewModel.viewCreated()
-        bindData(movies)
-        viewModel.itemSelected(movies.first().id) //Simular un click sobre un item
-        //testXml()
-        testListXml()
+        //val movies = viewModel.viewCreated()
+        //bindData(movies)
+        //viewModel.itemSelected(movies.first().id) //Simular un click sobre un item
+        //textXml()
+        //testListXml()
     }
     private fun bindData(movies:List<Movie>){
 
@@ -49,12 +49,22 @@ class MovieActivity : AppCompatActivity() {
 
     private fun textXml(){
         val xmlDataSource = MovieXmlLocalDataSource(this) //this se refiere a MovieActivity
-        val movie=viewModel.itemSelected("1")
-        movie?.let {
-            xmlDataSource.save(it)
-        }
-        val movieSaved = xmlDataSource.find("1")
-        Log.d("@dev",movieSaved.toString())
+        val movies: List<Movie> = listOf(
+            Movie("5", "title_5", "poster_5"),
+            Movie("6", "title_6", "poster_6"),
+            Movie("7", "title_7", "poster_7"),
+            Movie("8", "title_8", "poster_8")
+        )
+        val movie:Movie= Movie("9", "title_9", "poster_9")
+        xmlDataSource.saveAll(movies)
+        xmlDataSource.save(movie)
+        xmlDataSource.findById("7")
+        xmlDataSource.findById("9")
+        xmlDataSource.findAll()
+        xmlDataSource.deleteById("6")
+        xmlDataSource.findAll()
+        xmlDataSource.delete()
+        xmlDataSource.findAll()
 
     }
     private fun testListXml(){

@@ -2,7 +2,6 @@ package edu.iesam.dam2024.feature.superheros.data.local
 
 import android.content.Context
 import com.google.gson.Gson
-
 import edu.iesam.dam2024.feature.superheros.domain.Superhero
 
 class SuperheroXmlLocalDataSource (private val context: Context){
@@ -28,15 +27,10 @@ class SuperheroXmlLocalDataSource (private val context: Context){
         }
 
     }
-    fun find(id: String) : Superhero?{
-        val mapSuperheros = sharedPref.all //as Map< String, String>
-        mapSuperheros.values.forEach{jsonSuperhero ->
-            val superhero= gson.fromJson(jsonSuperhero as String, Superhero::class.java)
-            if (superhero.id == id){
-                return superhero
-            }
+    fun findById(id: String) : Superhero?{
+        return sharedPref.getString(id, null)?.let { superhero ->
+            gson.fromJson(superhero, Superhero::class.java)
         }
-        return null
     }
     fun findAll():List<Superhero>{
         val superheros= ArrayList<Superhero>()
@@ -49,5 +43,8 @@ class SuperheroXmlLocalDataSource (private val context: Context){
     }
     fun delete(){
         sharedPref.edit().clear().apply()
+    }
+    fun deleteById(heroId: String){
+        sharedPref.edit().remove(heroId).commit()
     }
 }
