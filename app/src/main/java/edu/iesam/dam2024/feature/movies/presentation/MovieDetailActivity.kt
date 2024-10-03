@@ -4,10 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import edu.iesam.dam2024.R
+import edu.iesam.dam2024.app.extensions.loadUrl
 import edu.iesam.dam2024.feature.movies.domain.Movie
-import com.bumptech.glide.Glide
+
 
 class MovieDetailActivity : AppCompatActivity() {
 
@@ -33,7 +35,8 @@ class MovieDetailActivity : AppCompatActivity() {
     }
     private fun binData(movie:Movie){
         val imageView = findViewById<ImageView>(R.id.poster)
-        Glide.with(this).load(movie).into(imageView)
+        imageView.loadUrl(movie.poster)
+        findViewById<TextView>(R.id.titleDetail).text = movie.title
     }
     companion object {
         val KEY_MOVIE_ID= "key_movie_id"

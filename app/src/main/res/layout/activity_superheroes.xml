@@ -57,5 +57,18 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"/>
   </LinearLayout>
+  <LinearLayout
+      android:id="@+id/hero_layout_4"
+      android:layout_margin="16dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="#60E459"
+      android:orientation="horizontal">
+    <TextView
+        android:id="@+id/goMovies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"/>
 
+  </LinearLayout>
 </LinearLayout>

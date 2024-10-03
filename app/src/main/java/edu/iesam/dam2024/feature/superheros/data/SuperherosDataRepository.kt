@@ -23,12 +23,10 @@ class SuperherosDataRepository (
     override fun getSuperhero(id: String): Superhero? {
         val localSuperhero = local.findById(id)
         if (localSuperhero == null){
-            val remoteSuperhero = mockRemoteDataSource.getSuperhero(id)
-            if (remoteSuperhero != null) {
-                local.save(remoteSuperhero)
-                return remoteSuperhero
-            }
-            return null
+          mockRemoteDataSource.getSuperhero(id)?.let {
+              local.save(it)
+              return it
+          }
         }
         return localSuperhero
     }

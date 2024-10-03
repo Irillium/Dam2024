@@ -2,20 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:id="@+id/detailMovie"
+    android:id="@+id/detailHero"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.movies.presentation.MovieDetailActivity">
+    android:orientation="vertical"
+    tools:context=".feature.superheros.presentation.SuperheroDetailActivity">
+
     <ImageView
-        android:id="@+id/poster"
+        android:id="@+id/imageHero"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
     <TextView
-        android:id="@+id/titleDetail"
+        android:id="@+id/nameHeroDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 </LinearLayout>

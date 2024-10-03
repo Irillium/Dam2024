@@ -1,16 +1,17 @@
 package edu.iesam.dam2024.feature.movies.presentation
 
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import edu.iesam.dam2024.R
-import edu.iesam.dam2024.feature.movies.data.local.MovieXmlLocalDataSource
 import edu.iesam.dam2024.feature.movies.domain.Movie
+import edu.iesam.dam2024.feature.superheros.presentation.SuperherosActivity
 
-class MovieActivity : AppCompatActivity() {
+class MoviesActivity : AppCompatActivity() {
 
     private lateinit var movieFactory: MovieFactory
     private lateinit var viewModel: MoviesViewModel
@@ -32,6 +33,11 @@ class MovieActivity : AppCompatActivity() {
         blockMovie(movies[1], R.id.movie_id_2, R.id.movie_title_2, R.id.movie_layout_2)
         blockMovie(movies[2], R.id.movie_id_3, R.id.movie_title_3, R.id.movie_layout_3)
         blockMovie(movies[3], R.id.movie_id_4, R.id.movie_title_4, R.id.movie_layout_4)
+        var goHero:String= getString(R.string.goSuperheros)
+        findViewById<TextView>(R.id.goHero).text= goHero
+        findViewById<LinearLayout>(R.id.movie_layout_5).setOnClickListener {
+            navigateToSuperherosList()
+        }
 
     }
 
@@ -46,5 +52,14 @@ class MovieActivity : AppCompatActivity() {
 
     private fun navigateToMovieDetail(movieId: String) {
         startActivity(MovieDetailActivity.getIntent(this,movieId))
+    }
+    private fun navigateToSuperherosList() {
+        startActivity(SuperherosActivity.getIntent(this))
+    }
+    companion object {
+        fun getIntent(context: Context): Intent {
+            val intent = Intent(context, MoviesActivity::class.java)
+            return intent
+        }
     }
 }

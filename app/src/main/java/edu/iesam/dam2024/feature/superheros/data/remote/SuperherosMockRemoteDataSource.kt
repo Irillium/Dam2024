@@ -9,14 +9,17 @@ class SuperherosMockRemoteDataSource {
     fun getSuperheros(): List<Superhero>{
         return listOf(
             Superhero(
-                id = "1",
-                name = "Superman"),
+                 "1",
+                 "Superman",
+              "https://img.posterstore.com/zoom/wb0057-8superman-cartoon50x70.jpg"),
             Superhero(
-                id = "2",
-                name = "Wonder Woman"),
+                "2",
+                "Wonder Woman",
+                "https://static.wikia.nocookie.net/personajes-de-ficcion-database/images/d/dc/Wonder_Woman_render.png/revision/latest?cb=20201112215419&path-prefix=es"),
             Superhero(
-                id = "3",
-                name = "Spider-Man")
+                "3",
+                "Spider-Man",
+                "https://m.media-amazon.com/images/I/71+2s0BFlKL._AC_UF894,1000_QL80_.jpg")
         )
     }
     fun getSuperhero(idHero:String) : Superhero?{
