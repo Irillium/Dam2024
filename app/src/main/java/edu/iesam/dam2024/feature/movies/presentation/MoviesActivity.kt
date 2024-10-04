@@ -4,6 +4,7 @@ package edu.iesam.dam2024.feature.movies.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -25,34 +26,40 @@ class MoviesActivity : AppCompatActivity() {
         movieFactory = MovieFactory(this)
         viewModel = movieFactory.buildViewModel()
 
-        val movieObserver = Observer<MoviesViewModel.UiState>{uiState->
-            uiState.movies?.let {
-                bindData(it)
-            }
-            uiState.errorApp?.let{
-                //pinto error
-            }
-            if(uiState.isLoading){
-                //muestro el cargado...
-            }else{
-                // oculto el cargado...
-            }
-
-        }
-        viewModel.uiState.observe(this,movieObserver)
-
+        setubObserver()
+        viewModel.viewCreated()
 
 
     }
 
-     fun bindData(movies: List<Movie>) {
+    private fun setubObserver() {
+        val movieObserver = Observer<MoviesViewModel.UiState> { uiState ->
+
+            uiState.movies?.let {
+                bindData(it)
+            }
+            uiState.errorApp?.let {
+                //pinto error
+            }
+            if (uiState.isLoading) {
+                Log.d("@dev", "muestro el cargado...")
+            } else {
+                Log.d("@dev", "oculto el cargado...")
+            }
+
+        }
+        viewModel.uiState.observe(this, movieObserver)
+
+    }
+
+    fun bindData(movies: List<Movie>) {
 
         blockMovie(movies[0], R.id.movie_id_1, R.id.movie_title_1, R.id.movie_layout_1)
         blockMovie(movies[1], R.id.movie_id_2, R.id.movie_title_2, R.id.movie_layout_2)
         blockMovie(movies[2], R.id.movie_id_3, R.id.movie_title_3, R.id.movie_layout_3)
         blockMovie(movies[3], R.id.movie_id_4, R.id.movie_title_4, R.id.movie_layout_4)
-        var goHero:String= getString(R.string.goSuperheros)
-        findViewById<TextView>(R.id.goHero).text= goHero
+        var goHero: String = getString(R.string.goSuperheros)
+        findViewById<TextView>(R.id.goHero).text = goHero
         findViewById<LinearLayout>(R.id.movie_layout_5).setOnClickListener {
             navigateToSuperherosList()
         }
@@ -66,21 +73,24 @@ class MoviesActivity : AppCompatActivity() {
             navigateToMovieDetail(movie.id)
         }
     }
-private fun funshowError(error: ErrorApp){
-    when(error){
-        ErrorApp.DataErrorApp -> TODO()
-        ErrorApp.InternetErrorApp -> TODO()
-        ErrorApp.ServerErrorApp -> TODO()
-        ErrorApp.UnknowErrorApp -> TODO()
+
+    private fun funshowError(error: ErrorApp) {
+        when (error) {
+            ErrorApp.DataErrorApp -> TODO()
+            ErrorApp.InternetErrorApp -> TODO()
+            ErrorApp.ServerErrorApp -> TODO()
+            ErrorApp.UnknowErrorApp -> TODO()
+        }
     }
-}
 
     private fun navigateToMovieDetail(movieId: String) {
-        startActivity(MovieDetailActivity.getIntent(this,movieId))
+        startActivity(MovieDetailActivity.getIntent(this, movieId))
     }
+
     private fun navigateToSuperherosList() {
         startActivity(SuperherosActivity.getIntent(this))
     }
+
     companion object {
         fun getIntent(context: Context): Intent {
             val intent = Intent(context, MoviesActivity::class.java)
