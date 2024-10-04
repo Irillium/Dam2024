@@ -9,11 +9,11 @@ import edu.iesam.dam2024.feature.movies.domain.Movie
 class MovieMockRemoteDataSource {
     fun getMovies(): List<Movie>{
         return listOf(
-            Movie("1","title1","poster1"),
-            Movie("2","title2","poster2"),
-            Movie("3","title3","poster3"),
+            Movie("1","Caroline","https://i.pinimg.com/474x/ff/66/43/ff6643b1f18c4a0dab75620c991f0c01.jpg"),
+            Movie("2","Pesadilla antes de navidad","https://pics.filmaffinity.com/the_nightmare_before_christmas-136057718-mmed.jpg"),
+            Movie("3","Planeta del tesoro","https://es.web.img3.acsta.net/r_1280_720/medias/nmedia/18/74/26/46/20078415.jpg"),
             // se puede desordenar la ingresion de datos aclarandolo de esta manera
-            Movie(title = "title4", id = "4", poster = "poster4")
+            Movie(title = "DUNE", id = "4", poster = "https://pixeldigitalcinema.com/wp-content/uploads/2021/08/dune-2021-poster.jpg")
         )
     }
     fun getMovie(movieId:String):Movie?{

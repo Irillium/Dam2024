@@ -1,5 +1,6 @@
 package edu.iesam.dam2024.feature.movies.data
 
+import edu.iesam.dam2024.feature.movies.data.local.MovieXmlLocalDataSource
 import edu.iesam.dam2024.feature.movies.data.remote.MovieMockRemoteDataSource
 import edu.iesam.dam2024.feature.movies.domain.Movie
 import edu.iesam.dam2024.feature.movies.domain.MovieRepository
@@ -7,12 +8,27 @@ import edu.iesam.dam2024.feature.movies.domain.MovieRepository
 /*
 * Naming: Modelo + DataRepository
 * */
-class MovieDataRepository (private  val mockRemoteDataSource: MovieMockRemoteDataSource) : MovieRepository{
+class MovieDataRepository (
+    private  val mockRemoteDataSource: MovieMockRemoteDataSource,
+    private val local: MovieXmlLocalDataSource) : MovieRepository{
     override fun getMovies(): List<Movie>{
-        return  mockRemoteDataSource.getMovies()
+        val moviesFromLocal = local.findAll()
+        if (moviesFromLocal.isEmpty()){
+            val moviesFromRemote = mockRemoteDataSource.getMovies()
+            local.saveAll(moviesFromRemote)
+            return moviesFromRemote
+        }
+        return moviesFromLocal
     }
 
     override fun getMovie(movieId: String): Movie? {
-        return mockRemoteDataSource.getMovie(movieId)
+        val localMovie = local.findById(movieId)
+        if (localMovie == null){
+            mockRemoteDataSource.getMovie(movieId)?.let {
+                local.save(it)
+                return it
+            }
+        }
+        return localMovie
     }
 }

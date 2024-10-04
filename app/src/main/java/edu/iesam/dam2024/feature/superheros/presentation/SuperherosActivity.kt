@@ -1,19 +1,28 @@
 package edu.iesam.dam2024.feature.superheros.presentation
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import edu.iesam.dam2024.R
+import edu.iesam.dam2024.feature.movies.presentation.MoviesActivity
 import edu.iesam.dam2024.feature.superheros.domain.Superhero
 
 class SuperherosActivity : AppCompatActivity() {
-    private val superheroFactory : SuperheroFactory= SuperheroFactory()
-    private val viewModel = superheroFactory.buildViewModel()
+
+    private lateinit var superheroFactory : SuperheroFactory
+    private lateinit var viewModel: SuperherosViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_superheroes)//esto se cambia segun la pantalla que se desea mostrar
+
+        superheroFactory = SuperheroFactory(this)
+        viewModel = superheroFactory.buildViewModel()
+
 
         val superheros = viewModel.viewCreated()
         bindData(superheros)
@@ -24,15 +33,30 @@ class SuperherosActivity : AppCompatActivity() {
         blockHero(heroes[0], R.id.hero_id_1,R.id.hero_name_1,R.id.hero_layout_1)
         blockHero(heroes[1], R.id.hero_id_2,R.id.hero_name_2,R.id.hero_layout_2)
         blockHero(heroes[2], R.id.hero_id_3,R.id.hero_name_3,R.id.hero_layout_3)
+        var goHero:String= getString(R.string.goMovies)
+        findViewById<TextView>(R.id.goMovies).text= goHero
+        findViewById<LinearLayout>(R.id.hero_layout_4).setOnClickListener {
+           navigateToMoviesList()
+        }
     }
-    private fun blockHero(heroes:Superhero,nId:Int, nName:Int, nLayout:Int ){
-        findViewById<TextView>(nId).text =heroes.id
-        findViewById<TextView>(nName).text = heroes.name
+    private fun blockHero(hero:Superhero,nId:Int, nName:Int, nLayout:Int ){
+        findViewById<TextView>(nId).text =hero.id
+        findViewById<TextView>(nName).text = hero.name
         findViewById<LinearLayout>(nLayout).setOnClickListener{
-            val hero1:Superhero?=viewModel.itemSelected(heroes.id)
-            hero1?.let {
-                Log.d("@hero", "Superheroe seleccionado: ${it.name}")
-            }
+            navigateToSuperheroDetail(hero.id)
+        }
+    }
+    private fun navigateToSuperheroDetail(id:String){
+        startActivity(SuperheroDetailActivity.getIntent(this,id))
+    }
+    private fun navigateToMoviesList() {
+        startActivity(MoviesActivity.getIntent(this))
+    }
+
+    companion object {
+        fun getIntent(context: Context): Intent {
+            val intent = Intent(context, SuperherosActivity::class.java)
+            return intent
         }
     }
 }
