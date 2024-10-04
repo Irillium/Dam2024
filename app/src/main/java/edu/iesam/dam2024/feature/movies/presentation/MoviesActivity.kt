@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import edu.iesam.dam2024.R
+import edu.iesam.dam2024.app.domain.ErrorApp
 import edu.iesam.dam2024.feature.movies.domain.Movie
 import edu.iesam.dam2024.feature.superheros.presentation.SuperherosActivity
 
@@ -23,11 +25,27 @@ class MoviesActivity : AppCompatActivity() {
         movieFactory = MovieFactory(this)
         viewModel = movieFactory.buildViewModel()
 
-        val movies = viewModel.viewCreated()
-        bindData(movies)
+        val movieObserver = Observer<MoviesViewModel.UiState>{uiState->
+            uiState.movies?.let {
+                bindData(it)
+            }
+            uiState.errorApp?.let{
+                //pinto error
+            }
+            if(uiState.isLoading){
+                //muestro el cargado...
+            }else{
+                // oculto el cargado...
+            }
+
+        }
+        viewModel.uiState.observe(this,movieObserver)
+
+
+
     }
 
-    private fun bindData(movies: List<Movie>) {
+     fun bindData(movies: List<Movie>) {
 
         blockMovie(movies[0], R.id.movie_id_1, R.id.movie_title_1, R.id.movie_layout_1)
         blockMovie(movies[1], R.id.movie_id_2, R.id.movie_title_2, R.id.movie_layout_2)
@@ -48,7 +66,14 @@ class MoviesActivity : AppCompatActivity() {
             navigateToMovieDetail(movie.id)
         }
     }
-
+private fun funshowError(error: ErrorApp){
+    when(error){
+        ErrorApp.DataErrorApp -> TODO()
+        ErrorApp.InternetErrorApp -> TODO()
+        ErrorApp.ServerErrorApp -> TODO()
+        ErrorApp.UnknowErrorApp -> TODO()
+    }
+}
 
     private fun navigateToMovieDetail(movieId: String) {
         startActivity(MovieDetailActivity.getIntent(this,movieId))

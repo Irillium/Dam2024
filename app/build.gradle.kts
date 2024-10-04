@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.gson.serializer)
     implementation(libs.glide)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
     //librerias para testing
     testImplementation(libs.junit)
     //librerias para Android-testing(test que hagan referencia al sdk de android)
