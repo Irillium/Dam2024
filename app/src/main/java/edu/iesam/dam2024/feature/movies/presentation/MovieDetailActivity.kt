@@ -3,9 +3,11 @@ package edu.iesam.dam2024.feature.movies.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import edu.iesam.dam2024.R
 import edu.iesam.dam2024.app.extensions.loadUrl
 import edu.iesam.dam2024.feature.movies.domain.Movie
@@ -23,17 +25,34 @@ class MovieDetailActivity : AppCompatActivity() {
         movieFactory = MovieFactory(this)
         viewModel = movieFactory.buildMovieDatailViewModel()
 
-        getMovieId()?.let { movieId ->
-            viewModel.itemSelected(movieId)?.let { movie ->
-                binData(movie)
-            }
+        setubObserver()
+        getMovieId()?.let {
+            viewModel.itemSelected(it)
         }
+    }
+    private fun setubObserver() {
+        val movieObserver = Observer<MovieDetailViewModel.UiState> { uiState ->
+
+            uiState.movie?.let {
+                bindData(it)
+            }
+            uiState.errorApp?.let {
+                //pinto error
+            }
+            if (uiState.isLoading) {
+                Log.d("@dev", "muestro el cargado...")
+            } else {
+                Log.d("@dev", "oculto el cargado...")
+            }
+
+        }
+        viewModel.uiState.observe(this, movieObserver)
 
     }
     private fun getMovieId():String?{
         return intent.getStringExtra(KEY_MOVIE_ID)
     }
-    private fun binData(movie:Movie){
+    private fun bindData(movie:Movie){
         val imageView = findViewById<ImageView>(R.id.poster)
         imageView.loadUrl(movie.poster)
         findViewById<TextView>(R.id.titleDetail).text = movie.title
