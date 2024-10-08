@@ -6,7 +6,6 @@ import edu.iesam.dam2024.feature.superheros.data.local.SuperheroXmlLocalDataSour
 import edu.iesam.dam2024.feature.superheros.data.remote.SuperherosMockRemoteDataSource
 import edu.iesam.dam2024.feature.superheros.domain.GetSuperheroUseCase
 import edu.iesam.dam2024.feature.superheros.domain.GetSuperherosUseCase
-import edu.iesam.dam2024.feature.superheros.domain.SuperheroRepository
 
 class SuperheroFactory ( private val context:Context){
     private val superheroMockRemote = SuperherosMockRemoteDataSource()
