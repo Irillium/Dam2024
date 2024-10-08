@@ -33,6 +33,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -44,7 +47,23 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.gson.serializer)
     implementation(libs.glide)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+
+
+    val nav_version = "2.8.0"
+
+    // Jetpack Compose integration
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    // Views/Fragments integration
+    implementation("androidx.navigation:navigation-fragment:$nav_version")
+    implementation("androidx.navigation:navigation-ui:$nav_version")
+
+    // Feature module support for Fragments
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+
+
+
+    
     //librerias para testing
     testImplementation(libs.junit)
     //librerias para Android-testing(test que hagan referencia al sdk de android)

@@ -10,7 +10,6 @@ import edu.iesam.dam2024.feature.movies.domain.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MoviesViewModel(private val getMoviesUseCase: GetMoviesUseCase):ViewModel() {
 
