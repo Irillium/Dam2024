@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import edu.iesam.dam2024.R
 import edu.iesam.dam2024.feature.movies.presentation.MoviesActivity
 import edu.iesam.dam2024.feature.superheros.domain.Superhero
@@ -24,8 +25,29 @@ class SuperherosActivity : AppCompatActivity() {
         viewModel = superheroFactory.buildViewModel()
 
 
-        val superheros = viewModel.viewCreated()
-        bindData(superheros)
+        setubObserver()
+        viewModel.viewCreated()
+
+
+    }
+
+    private fun setubObserver() {
+        val movieObserver = Observer<SuperherosViewModel.UiState> { uiState ->
+
+            uiState.superheros?.let {
+                bindData(it)
+            }
+            uiState.errorApp?.let {
+                //pinto error
+            }
+            if (uiState.isLoading) {
+                Log.d("@dev", "muestro el cargado...")
+            } else {
+                Log.d("@dev", "oculto el cargado...")
+            }
+
+        }
+        viewModel.uiState.observe(this, movieObserver)
 
     }
 
