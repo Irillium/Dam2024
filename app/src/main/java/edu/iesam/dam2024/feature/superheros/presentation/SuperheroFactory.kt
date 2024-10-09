@@ -13,10 +13,15 @@ class SuperheroFactory ( private val context:Context){
     private val heroRepository = SuperherosDataRepository(superheroMockRemote,superheroLocal)
     private val getSuperheroUseCase = GetSuperheroUseCase(heroRepository)
     private val getSuperherosUseCase = GetSuperherosUseCase(heroRepository)
+    private val superheroListViewModel = SuperheroListViewModel(getSuperherosUseCase)
     fun buildViewModel(): SuperherosViewModel{
         return SuperherosViewModel(getSuperherosUseCase)
     }
     fun buildSuperheroDetailViewModel() : SuperheroDetailViewModel{
         return SuperheroDetailViewModel(getSuperheroUseCase)
+    }
+
+    fun buildSuperheroListViewModel() :SuperheroListViewModel{
+        return superheroListViewModel
     }
 }
