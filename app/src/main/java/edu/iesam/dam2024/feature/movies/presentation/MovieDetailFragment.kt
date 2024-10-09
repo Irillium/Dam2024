@@ -7,15 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import edu.iesam.dam2024.R
-import edu.iesam.dam2024.app.extensions.loadUrl
 import edu.iesam.dam2024.databinding.FragmentMoviesBinding
 import edu.iesam.dam2024.feature.movies.domain.Movie
-import edu.iesam.dam2024.feature.movies.presentation.MovieDetailActivity.Companion.KEY_MOVIE_ID
 
 class MovieDetailFragment :Fragment(){
     private lateinit var movieFactory: MovieFactory
@@ -43,7 +38,8 @@ class MovieDetailFragment :Fragment(){
         }
     }
     private fun getMovieId():String?{
-        return intent.getStringExtra(KEY_MOVIE_ID)
+        //intent.getStringExtra(KEY_MOVIE_ID)
+        return "1"
     }
     private fun bindData(movie: Movie){
         //val imageView = findViewById<ImageView>(R.id.poster)
@@ -66,7 +62,7 @@ class MovieDetailFragment :Fragment(){
             }
 
         }
-        viewModel.uiState.observe(this, movieObserver)
+        viewModel.uiState.observe(viewLifecycleOwner, movieObserver)
 
     }
     companion object {

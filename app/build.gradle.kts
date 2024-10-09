@@ -47,20 +47,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.gson.serializer)
     implementation(libs.glide)
-
-
-    val nav_version = "2.8.0"
-
-    // Jetpack Compose integration
-    implementation("androidx.navigation:navigation-compose:$nav_version")
-
-    // Views/Fragments integration
-    implementation("androidx.navigation:navigation-fragment:$nav_version")
-    implementation("androidx.navigation:navigation-ui:$nav_version")
-
-    // Feature module support for Fragments
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
-
+    implementation(libs.nav.ui)
+    implementation(libs.nav.fragment)
+    api(libs.nav.fragment.ktx)
 
 
     
