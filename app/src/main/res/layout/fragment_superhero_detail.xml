@@ -8,10 +8,7 @@
     android:orientation="vertical"
     tools:context=".feature.superheros.presentation.SuperheroDetailActivity">
 
-    <fragment
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="edu.iesam.dam2024.feature.superheros.presentation.SuperheroDetailFragment">
-
-    </fragment>
+        android:layout_height="match_parent"></TextView>
 </LinearLayout>

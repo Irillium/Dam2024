@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:tools="http://schemas.android.com/tools"
-     android:id="@+id/main"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:orientation="vertical"
-     tools:context=".feature.superheros.presentation.SuperherosActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".feature.superheros.presentation.SuperherosActivity">
   <Toolbar
       android:title="SUPERHEROS"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"></Toolbar>
 
   <androidx.fragment.app.FragmentContainerView
-      android:id="@+id/fragmentHeroes_1"
+      android:background="#9C2196F3"
+      android:id="@+id/container"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:name="edu.iesam.dam2024.feature.superheros.presentation.SuperheroListFragment"></androidx.fragment.app.FragmentContainerView>
+      app:defaultNavHost="true"
+      app:navGraph="@navigation/nav_graph"
+    ></androidx.fragment.app.FragmentContainerView>
 
  </LinearLayout>

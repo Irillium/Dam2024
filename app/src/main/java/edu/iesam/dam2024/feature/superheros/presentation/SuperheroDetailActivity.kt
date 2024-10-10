@@ -32,9 +32,7 @@ class SuperheroDetailActivity : AppCompatActivity() {
         return intent.getStringExtra(KEY_HERO_ID)
     }
     private fun bindData(hero:Superhero){
-        val imageView = findViewById<ImageView>(R.id.imageHero)
-        imageView.loadUrl(hero.image)
-        findViewById<TextView>(R.id.nameHeroDetail).text= hero.name
+
     }
     companion object{
         val KEY_HERO_ID = "key_hero_id"

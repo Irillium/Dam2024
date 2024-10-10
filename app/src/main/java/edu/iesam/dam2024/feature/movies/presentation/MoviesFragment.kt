@@ -95,7 +95,7 @@ class MoviesFragment : Fragment() {
     }
 
     private fun navigateToMovieDetail(movieId: String) {
-        startActivity(MovieDetailActivity.getIntent(requireContext(), movieId))
+       // startActivity(MovieDetailActivity.getIntent(requireContext(), movieId))
     }
 
     private fun navigateToSuperherosList() {
