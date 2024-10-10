@@ -47,7 +47,13 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
     //librerias para testing
     testImplementation(libs.junit)
+    //Mockito framework
+    testImplementation("org.mockito:mockito-core:5.11.0")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.11.0")
+
     //librerias para Android-testing(test que hagan referencia al sdk de android)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.junit.jupiter)
+    androidTestImplementation(libs.junit.jupiter)
 }
