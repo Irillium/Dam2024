@@ -7,19 +7,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".feature.superheros.presentation.SuperherosActivity">
   <Toolbar
       android:title="SUPERHEROS"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"></Toolbar>
+      android:layout_height="wrap_content"
+      android:background="#D947EF"
+     ></Toolbar>
 
-  <androidx.fragment.app.FragmentContainerView
-      android:background="#9C2196F3"
-      android:id="@+id/container"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      app:defaultNavHost="true"
-      app:navGraph="@navigation/nav_graph"
-    ></androidx.fragment.app.FragmentContainerView>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
 
  </LinearLayout>

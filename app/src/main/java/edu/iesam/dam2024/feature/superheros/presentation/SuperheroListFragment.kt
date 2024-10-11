@@ -4,15 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import edu.iesam.dam2024.R
 import edu.iesam.dam2024.databinding.FragmentSuperheroListBinding
-import edu.iesam.dam2024.feature.movies.presentation.MovieDetailViewModel
-import edu.iesam.dam2024.feature.movies.presentation.MovieFactory
 import edu.iesam.dam2024.feature.superheros.domain.Superhero
 
 class SuperheroListFragment : Fragment() {
@@ -35,8 +30,9 @@ class SuperheroListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         factory = SuperheroFactory(requireContext())
-        setubObserver()
         viewModel = factory.buildSuperheroListViewModel()
+        setubObserver()
+        viewModel.loadSuperheroes()
     }
 
     private fun setubObserver() {
@@ -65,29 +61,30 @@ class SuperheroListFragment : Fragment() {
             hero1.apply {
                 text = heroes[0].name
                 setOnClickListener {
-
+                    navigateToDetail(heroes[0].id)
                 }
                 hero2.apply {
                     text = heroes[1].name
                     setOnClickListener {
-
+                        navigateToDetail(heroes[1].id)
                     }
                 }
                 hero3.apply {
                     text = heroes[2].name
                     setOnClickListener {
-
+                        navigateToDetail(heroes[2].id)
                     }
                 }
 
             }
         }
-        fun navigateToDetail(id: String) {
-            findNavController().navigate(
-                SuperheroListFragmentDirections.actionFromSuperheroToSuperheroDetail()
-            )
 
-        }
+
+    }
+    fun navigateToDetail(id: String) {
+        findNavController().navigate(
+            SuperheroListFragmentDirections.actionFromSuperheroToSuperheroDetail(id)
+        )
 
     }
 }

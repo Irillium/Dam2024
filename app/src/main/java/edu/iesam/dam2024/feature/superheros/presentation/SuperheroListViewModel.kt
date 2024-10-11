@@ -11,13 +11,13 @@ import kotlinx.coroutines.*
 
 class SuperheroListViewModel(private val getSuperherosUseCase: GetSuperherosUseCase): ViewModel() {
 
-    private val _uiStrate= MutableLiveData<UiState>()
-    val uiState : LiveData<UiState> = _uiStrate
+    private val _uiState= MutableLiveData<UiState>()
+    val uiState : LiveData<UiState> = _uiState
 
     fun loadSuperheroes(){
         viewModelScope.launch(Dispatchers.IO){
             val  superheroes = getSuperherosUseCase.invoke()
-            UiState(superheroes=superheroes)
+            _uiState.postValue(UiState(superheroes = superheroes))
         }
     }
 
