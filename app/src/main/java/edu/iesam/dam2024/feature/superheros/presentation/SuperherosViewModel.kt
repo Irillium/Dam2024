@@ -6,7 +6,7 @@ import edu.iesam.dam2024.feature.superheros.domain.Superhero
 
 class SuperherosViewModel (
     private val getSuperherosUseCase: GetSuperherosUseCase) : ViewModel() {
-    fun  viewCreated(): List<Superhero>{
+    suspend fun  viewCreated(): List<Superhero>{
         return getSuperherosUseCase.invoke()
     }
 
