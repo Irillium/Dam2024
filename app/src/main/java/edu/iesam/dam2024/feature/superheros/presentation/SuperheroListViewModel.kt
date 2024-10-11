@@ -16,8 +16,16 @@ class SuperheroListViewModel(private val getSuperherosUseCase: GetSuperherosUseC
 
     fun loadSuperheroes(){
         viewModelScope.launch(Dispatchers.IO){
-            val  superheroes = getSuperherosUseCase.invoke()
-            _uiState.postValue(UiState(superheroes = superheroes))
+            _uiState.postValue(UiState(isLoading = true))
+            try {
+                val  superheroes = getSuperherosUseCase.invoke()
+                _uiState.postValue(UiState(
+                    isLoading = false,
+                    superheroes = superheroes))
+            }catch (e:Exception){
+                _uiState.postValue(UiState(isLoading = false))
+            }
+
         }
     }
 

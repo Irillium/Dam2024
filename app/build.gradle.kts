@@ -52,7 +52,9 @@ dependencies {
     implementation(libs.nav.fragment)
     api(libs.nav.fragment.ktx)
 
-
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     
     //librerias para testing
     testImplementation(libs.junit)

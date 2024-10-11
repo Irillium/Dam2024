@@ -35,6 +35,10 @@ class SuperheroListFragment : Fragment() {
         viewModel.loadSuperheroes()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
     private fun setubObserver() {
         val observer = Observer<SuperheroListViewModel.UiState> { uiState ->
             uiState.superheroes?.let { superheroes ->
@@ -55,8 +59,6 @@ class SuperheroListFragment : Fragment() {
     }
 
     private fun bindData(heroes: List<Superhero>) {
-        //binding.hero1.text=heroes[0].name
-        //binding.hero1.setOnClickListener{ }
         binding.apply {
             hero1.apply {
                 text = heroes[0].name

@@ -61,7 +61,7 @@ class SuperheroDetailFragment : Fragment() {
 
     private fun bindData(hero: Superhero) {
         binding.apply {
-            imgHeroDetail.loadUrl(hero.image)
+            imgHeroDetail.loadUrl(hero.images.lg)
             name.text = hero.name
         }
     }
