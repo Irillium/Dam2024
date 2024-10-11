@@ -9,5 +9,6 @@ class SuperherosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_superheroes)//esto se cambia segun la pantalla que se desea mostrar
+
     }
 }

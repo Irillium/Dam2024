@@ -9,12 +9,12 @@
         android:name="edu.iesam.dam2024.feature.superheros.presentation.SuperheroListFragment"
         tools:layout="@layout/fragment_superhero_list">
         <action android:id="@+id/action_from_superhero_to_superhero_detail"
-            app:destination="@+id/superhero_detail_fragment"/>
+            app:destination="@+id/didi"/>
 
     </fragment>
 
     <fragment
-        android:id="@+id/superhero_detail_fragment"
+        android:id="@+id/didi"
         android:name="edu.iesam.dam2024.feature.superheros.presentation.SuperheroDetailFragment"
         tools:layout="@layout/fragment_superhero_detail">
 

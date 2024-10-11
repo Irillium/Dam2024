@@ -99,7 +99,7 @@ class MoviesFragment : Fragment() {
     }
 
     private fun navigateToSuperherosList() {
-        startActivity(SuperherosActivity.getIntent(requireContext()))
+       // startActivity(SuperherosActivity.getIntent(requireContext()))
     }
     override fun onDestroyView() {
         super.onDestroyView()
