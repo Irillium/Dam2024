@@ -3,26 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/superhero_fragment">
+    app:startDestination="@id/movies_fragment">
+
+    <fragment
+        android:id="@+id/movies_fragment"
+        android:name="edu.iesam.dam2024.feature.movies.presentation.MoviesFragment"
+        tools:layout="@layout/fragment_movies">
+
+        <action
+            android:id="@+id/action_from_movies_to_movie_detail"
+            app:destination="@+id/fragment_movie_detail" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_movie_detail"
+        android:name="edu.iesam.dam2024.feature.movies.presentation.MovieDetailFragment"
+        tools:layout="@layout/fragment_movie_detail">
+        <argument
+            android:name="movieId"
+            android:defaultValue="1"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+
+
     <fragment
         android:id="@+id/superhero_fragment"
         android:name="edu.iesam.dam2024.feature.superheros.presentation.SuperheroListFragment"
         tools:layout="@layout/fragment_superhero_list">
-        <action android:id="@+id/action_from_superhero_to_superhero_detail"
-            app:destination="@+id/didi"/>
+        <action
+            android:id="@+id/action_from_superhero_to_superhero_detail"
+            app:destination="@+id/fragment_superhero_detal" />
 
     </fragment>
-
     <fragment
-        android:id="@+id/didi"
+        android:id="@+id/fragment_superhero_detal"
         android:name="edu.iesam.dam2024.feature.superheros.presentation.SuperheroDetailFragment"
         tools:layout="@layout/fragment_superhero_detail">
 
         <argument
             android:name="superheroId"
+            android:defaultValue="1"
             app:argType="string"
-            app:nullable="false"
-            android:defaultValue="1"/>
+            app:nullable="false" />
     </fragment>
 
 </navigation>

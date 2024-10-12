@@ -6,12 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".feature.movies.presentation.MoviesActivity">
 
+   <Toolbar
+       android:title="MOVIES"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="#2196F3"
+       ></Toolbar>
+
    <androidx.fragment.app.FragmentContainerView
+       android:id="@+id/container"
+       android:name="androidx.navigation.fragment.NavHostFragment"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:name="androidx.navigation.fragment.NavHostFragment">
-   </androidx.fragment.app.FragmentContainerView>
+       app:defaultNavHost="true"
+       app:navGraph="@navigation/nav_graph" />
 
 </LinearLayout>
