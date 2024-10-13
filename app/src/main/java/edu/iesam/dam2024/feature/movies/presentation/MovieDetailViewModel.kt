@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import edu.iesam.dam2024.app.domain.ErrorApp
 import edu.iesam.dam2024.feature.movies.domain.GetMovieUseCase
 import edu.iesam.dam2024.feature.movies.domain.Movie
-import edu.iesam.dam2024.feature.movies.presentation.MoviesViewModel.UiState
 
 import kotlinx.coroutines.*
 
@@ -25,7 +24,7 @@ class MovieDetailViewModel (private val getMovieUseCase : GetMovieUseCase) : Vie
     }
 data class UiState(
     val isLoading:Boolean=false,
-    val errorApp:ErrorApp?=null,
+    val errorApp: ErrorApp?=null,
     val movie:Movie?=null
 )
 }

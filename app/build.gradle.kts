@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.navigation.safeargs.kotlin)
 }
 
 android {
@@ -33,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -44,7 +48,14 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.gson.serializer)
     implementation(libs.glide)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation(libs.nav.ui)
+    implementation(libs.nav.fragment)
+    api(libs.nav.fragment.ktx)
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    
     //librerias para testing
     testImplementation(libs.junit)
     //librerias para Android-testing(test que hagan referencia al sdk de android)

@@ -5,18 +5,19 @@
     android:id="@+id/detailHero"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".feature.superheros.presentation.SuperheroDetailActivity">
+    android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/imageHero"
+        android:id="@+id/img_hero_detail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"></ImageView>
+
     <TextView
-        android:id="@+id/nameHeroDetail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/name"
         android:layout_weight="1"
-        android:textAlignment="center" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"></TextView>
+
 </LinearLayout>
