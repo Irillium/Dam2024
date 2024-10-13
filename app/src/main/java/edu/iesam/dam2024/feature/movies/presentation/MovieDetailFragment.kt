@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
+import edu.iesam.dam2024.app.extensions.loadUrl
+import edu.iesam.dam2024.databinding.FragmentMovieDetailBinding
 import edu.iesam.dam2024.databinding.FragmentMoviesBinding
 import edu.iesam.dam2024.feature.movies.domain.Movie
 
@@ -16,36 +19,29 @@ class MovieDetailFragment :Fragment(){
     private lateinit var movieFactory: MovieFactory
     private lateinit var viewModel: MovieDetailViewModel
 
-    private var _binding: FragmentMoviesBinding? =null
+    private var _binding: FragmentMovieDetailBinding? =null
     private val binding get() = _binding!!//Forzado a no nulo
+
+    private val movieArgs: MovieDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMoviesBinding.inflate(inflater,container, false)
+        _binding = FragmentMovieDetailBinding.inflate(inflater,container, false)
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        movieArgs.movieId
         movieFactory = MovieFactory(requireContext())
-        viewModel = movieFactory.buildMovieDatailViewModel()
-
+        viewModel = movieFactory.buildMovieDetailViewModel()
         setubObserver()
-        getMovieId()?.let {
-            viewModel.itemSelected(it)
-        }
+       viewModel.itemSelected(movieArgs.movieId)
     }
-    private fun getMovieId():String?{
-        //intent.getStringExtra(KEY_MOVIE_ID)
-        return "1"
-    }
-    private fun bindData(movie: Movie){
-        //val imageView = findViewById<ImageView>(R.id.poster)
-        //imageView.loadUrl(movie.poster)
-        //findViewById<TextView>(R.id.titleDetail).text = movie.title
-    }
+
+
     private fun setubObserver() {
         val movieObserver = Observer<MovieDetailViewModel.UiState> { uiState ->
 
@@ -65,14 +61,16 @@ class MovieDetailFragment :Fragment(){
         viewModel.uiState.observe(viewLifecycleOwner, movieObserver)
 
     }
-    companion object {
-        val KEY_MOVIE_ID= "key_movie_id"
 
-        fun getIntent(context: Context, movieId:String): Intent {
-            val intent = Intent(context, MovieDetailActivity::class.java)
-            intent.putExtra(KEY_MOVIE_ID,movieId)
-            return intent
+    private fun bindData(movie: Movie){
+        binding.apply {
+            poster.loadUrl(movie.poster)
+            titleDetail.text=movie.title
         }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding= null
     }
 
 }

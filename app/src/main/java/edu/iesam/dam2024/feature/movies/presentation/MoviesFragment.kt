@@ -5,22 +5,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import edu.iesam.dam2024.R
 import edu.iesam.dam2024.databinding.FragmentMoviesBinding
 import edu.iesam.dam2024.feature.movies.domain.Movie
-import edu.iesam.dam2024.feature.superheros.presentation.SuperherosActivity
 
 class MoviesFragment : Fragment() {
 
     private lateinit var movieFactory: MovieFactory
     private lateinit var viewModel: MoviesViewModel
 
-    private var _binding: FragmentMoviesBinding? =null
+    private var _binding: FragmentMoviesBinding? = null
     private val binding get() = _binding!!//Forzado a no nulo
 
 
@@ -29,20 +25,20 @@ class MoviesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMoviesBinding.inflate(inflater,container, false)
+        _binding = FragmentMoviesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setubObserver()
         movieFactory = MovieFactory(requireContext())
-        viewModel=movieFactory.buildViewModel()
+        viewModel = movieFactory.buildViewModel()
+        setubObserver()
         viewModel.viewCreated()
     }
+
     private fun setubObserver() {
         val movieObserver = Observer<MoviesViewModel.UiState> { uiState ->
-
             uiState.movies?.let {
                 bindData(it)
             }
@@ -60,49 +56,42 @@ class MoviesFragment : Fragment() {
 
     }
 
-    fun bindData(movies: List<Movie>) {
+    private fun bindData(movies: List<Movie>) {
+        binding.apply {
+            movieId1.text = movies[0].id
+            movieTitle1.text = movies[0].title
+            movieLayout1.setOnClickListener {
+                navigateToMovieDetail(movies[1].id)
+            }
 
-        binding.movieId1.text = movies[0].id
-        binding.movieTitle1.text = movies[0].title
-        binding.movieLayout1.setOnClickListener{
-           //findNavController().navigate(R.)
+            movieId2.text = movies[1].id
+            movieTitle2.text = movies[1].title
+            movieLayout2.setOnClickListener {
+                navigateToMovieDetail(movies[1].id)
+            }
+
+            movieId3.text = movies[2].id
+            movieTitle3.text = movies[2].title
+            movieLayout3.setOnClickListener {
+                navigateToMovieDetail(movies[2].id)
+            }
+
+            movieId4.text = movies[3].id
+            movieTitle4.text = movies[3].title
+            movieLayout4.setOnClickListener {
+                navigateToMovieDetail(movies[3].id)
+            }
         }
-
-        binding.movieId1.text = movies[1].id
-        binding.movieTitle1.text = movies[1].title
-        binding.movieLayout1.setOnClickListener{
-            navigateToMovieDetail(movies[1].id)
-        }
-
-        binding.movieId1.text = movies[2].id
-        binding.movieTitle1.text = movies[2].title
-        binding.movieLayout1.setOnClickListener{
-            navigateToMovieDetail(movies[2].id)
-        }
-
-        binding.movieId1.text = movies[3].id
-        binding.movieTitle1.text = movies[3].title
-        binding.movieLayout1.setOnClickListener{
-            navigateToMovieDetail(movies[3].id)
-        }
-
-        val goHero: String = getString(R.string.goSuperheros)
-        binding.goHero.text= goHero
-        binding.movieLayout5.setOnClickListener {
-            navigateToSuperherosList()
-        }
-
     }
 
     private fun navigateToMovieDetail(movieId: String) {
-       // startActivity(MovieDetailActivity.getIntent(requireContext(), movieId))
+       findNavController().navigate(
+           MoviesFragmentDirections.actionFromMoviesToMovieDetail(movieId)
+       )
     }
 
-    private fun navigateToSuperherosList() {
-       // startActivity(SuperherosActivity.getIntent(requireContext()))
-    }
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding= null
+        _binding = null
     }
 }
