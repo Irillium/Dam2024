@@ -19,7 +19,7 @@ class PokemonDataRepository(
         return pokemonsFromLocal
     }
 
-    override fun getPoquemon(id: String): Pokemon? {
+    override fun getPokemon(id: String): Pokemon? {
        val localPokemon = local.findById(id)
         if (localPokemon == null){
             remote.getPokemon(id)?.let {
