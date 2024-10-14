@@ -15,10 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dam2024"
         tools:targetApi="31">
-
         <activity
-            android:name=".feature.movies.presentation.MoviesActivity"
-            android:exported="true">
+            android:name=".feature.pokemons.presentation.PokemonActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,10 +25,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".feature.movies.presentation.MoviesActivity"
+            android:exported="false">
+
+        </activity>
+        <activity
             android:name=".feature.superheros.presentation.SuperherosActivity"
             android:exported="false">
 
-    </activity>
+        </activity>
     </application>
 
 </manifest>

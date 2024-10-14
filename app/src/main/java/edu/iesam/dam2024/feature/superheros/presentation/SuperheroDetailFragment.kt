@@ -35,7 +35,7 @@ class SuperheroDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         superheroArgs.superheroId
         factory = SuperheroFactory(requireContext())
-         viewModel = factory.buildSuperheroDetailViewModel()
+        viewModel = factory.buildSuperheroDetailViewModel()
         setubObserver()
         viewModel.itemSelected(superheroArgs.superheroId)
     }
