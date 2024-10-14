@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/movies_fragment">
+    app:startDestination="@id/pokemon_list_fragment">
 
     <fragment
         android:id="@+id/movies_fragment"
@@ -33,11 +33,11 @@
         tools:layout="@layout/fragment_superhero_list">
         <action
             android:id="@+id/action_from_superhero_to_superhero_detail"
-            app:destination="@+id/fragment_superhero_detal" />
+            app:destination="@+id/fragment_superhero_detail" />
 
     </fragment>
     <fragment
-        android:id="@+id/fragment_superhero_detal"
+        android:id="@+id/fragment_superhero_detail"
         android:name="edu.iesam.dam2024.feature.superheros.presentation.SuperheroDetailFragment"
         tools:layout="@layout/fragment_superhero_detail">
 
@@ -46,6 +46,22 @@
             android:defaultValue="1"
             app:argType="string"
             app:nullable="false" />
+    </fragment>
+
+    <fragment android:id="@+id/pokemon_list_fragment"
+        android:name="edu.iesam.dam2024.feature.pokemons.presentation.PokemonListFragment"
+        tools:layout="@layout/fragment_pokemon_list">
+        <action android:id="@+id/action_from_pokemon_to_pokemon_detail"
+            app:destination="@+id/fragment_pokemon_detail"/>
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_pokemon_detail"
+        android:name="edu.iesam.dam2024.feature.pokemons.presentation.PokemonDetailFragment"
+        tools:layout="@layout/fragment_pokemon_detail">
+        <argument android:name="pokemonId"
+            android:defaultValue="1"
+            app:argType="string"
+            app:nullable="false"/>
     </fragment>
 
 </navigation>
