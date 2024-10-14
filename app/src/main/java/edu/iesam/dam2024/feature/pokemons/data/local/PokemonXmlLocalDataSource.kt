@@ -14,14 +14,14 @@ class PokemonXmlLocalDataSource(private val context: Context) {
 
     fun save(pokemon: Pokemon){
         sharedPref.edit().apply {
-            putString(pokemon.id,gson.toJson(pokemon))
+            putString(pokemon.name,gson.toJson(pokemon))
             apply()
         }
     }
     fun saveAll(pokemons:List<Pokemon>){
         sharedPref.edit().apply {
             pokemons.forEach { pokemon ->
-                putString(pokemon.id,gson.toJson(pokemon))
+                putString(pokemon.name,gson.toJson(pokemon))
             }
             apply()
         }

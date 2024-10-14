@@ -11,7 +11,7 @@
     tools:context=".feature.pokemons.presentation.PokemonActivity">
 <Toolbar
     android:title="POKEMONS"
-    android:background="#7747EF"
+    android:background="#FF9800"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
 

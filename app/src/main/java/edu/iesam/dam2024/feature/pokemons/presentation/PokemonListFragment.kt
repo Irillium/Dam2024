@@ -61,39 +61,39 @@ class PokemonListFragment:Fragment(){
             pokemon1.apply {
                 text=pokemons[0].name
                 setOnClickListener(){
-                    navigateToDetail(pokemons[0].id)
+                    navigateToDetail(pokemons[0].name)
                 }
             }
             pokemon2.apply {
                 text=pokemons[1].name
                 setOnClickListener(){
-                    navigateToDetail(pokemons[1].id)
+                    navigateToDetail(pokemons[1].name)
                 }
             }
             pokemon3.apply {
                 text=pokemons[2].name
                 setOnClickListener(){
-                    navigateToDetail(pokemons[2].id)
+                    navigateToDetail(pokemons[2].name)
                 }
             }
             pokemon4.apply {
                 text=pokemons[3].name
                 setOnClickListener(){
-                    navigateToDetail(pokemons[3].id)
+                    navigateToDetail(pokemons[3].name)
                 }
             }
             pokemon5.apply {
                 text=pokemons[4].name
                 setOnClickListener(){
-                    navigateToDetail(pokemons[4].id)
+                    navigateToDetail(pokemons[4].name)
                 }
             }
         }
 
     }
-    fun navigateToDetail(id: String) {
+    fun navigateToDetail(name: String) {
         findNavController().navigate(
-            PokemonListFragmentDirections.actionFromPokemonToPokemonDetail(id)
+            PokemonListFragmentDirections.actionFromPokemonToPokemonDetail(name)
         )
     }
 }
