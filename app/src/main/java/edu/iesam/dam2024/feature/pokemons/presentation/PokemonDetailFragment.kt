@@ -61,7 +61,9 @@ class PokemonDetailFragment : Fragment() {
 
     fun bindData(pokemon:Pokemon){
         binding.apply {
-            img.loadUrl(pokemon.sprites.backDefault)
+            pokemon.sprites.front_default?.let { url ->
+                img.loadUrl(url)
+            }
             name.text=pokemon.name
         }
     }

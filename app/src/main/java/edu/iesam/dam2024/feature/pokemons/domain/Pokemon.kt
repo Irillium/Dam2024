@@ -1,45 +1,57 @@
 package edu.iesam.dam2024.feature.pokemons.domain
 
+data class PokemonResponse(
+    val count: Int,
+    val next: String?,
+    val previous: String?,
+    val results: List<PokemonResult>
+)
+
+data class PokemonResult(
+    val name: String,
+    val url: String
+)
+// Clase principal del modelo Pokemon
 data class Pokemon(
     val id: String,
     val name: String,
-    //val baseExperience: String,
-    //val height: String,
-    //val isDefault: Boolean,
-    //val order: String,
-    //val weight: String,
-    //val abilities: List<Ability>,
-    //val forms: List<Form>,
-    //val gameIndices: List<GameIndex>,
-    //val heldItems: List<HeldItem>,
-    //val locationAreaEncounters: String,
-    //val moves: List<Move>,
-    //val species: Species,
+    val base_experience: Int,
+    val height: Int,
+    val weight: Int,
+    val abilities: List<AbilitySlot>,
+    val forms: List<Form>,
+    val game_indices: List<GameIndex>,
+    val held_items: List<HeldItem>,
+    val location_area_encounters: String,
+    val moves: List<MoveSlot>,
+    val species: Species,
     val sprites: Sprites,
-    //val cries: Cries,
-    //val stats: List<Stat>,
-    //val types: List<Type>,
-    //val pastTypes: List<PastType>
+    val stats: List<StatSlot>,
+    val types: List<TypeSlot>,
+    val past_types: List<PastType>
+)
+
+// Habilidad y su slot
+data class AbilitySlot(
+    val is_hidden: Boolean,
+    val slot: Int,
+    val ability: Ability
 )
 
 data class Ability(
-    val isHidden: Boolean,
-    val slot: Int,
-    val ability: AbilityDetail
-)
-
-data class AbilityDetail(
     val name: String,
     val url: String
 )
 
+// Formas del Pokémon
 data class Form(
     val name: String,
     val url: String
 )
 
+// Índices del juego
 data class GameIndex(
-    val gameIndex: Int,
+    val game_index: Int,
     val version: Version
 )
 
@@ -48,9 +60,10 @@ data class Version(
     val url: String
 )
 
+// Objetos retenidos por el Pokémon
 data class HeldItem(
     val item: Item,
-    val versionDetails: List<VersionDetail>
+    val version_details: List<VersionDetail>
 )
 
 data class Item(
@@ -63,20 +76,26 @@ data class VersionDetail(
     val version: Version
 )
 
-data class Move(
-    val move: MoveDetail,
-    val versionGroupDetails: List<VersionGroupDetail>
+// Movimientos del Pokémon
+data class MoveSlot(
+    val move: Move,
+    val version_group_details: List<VersionGroupDetail>
 )
 
-data class MoveDetail(
+data class Move(
     val name: String,
     val url: String
 )
 
 data class VersionGroupDetail(
-    val levelLearnedAt: Int,
-    val versionGroup: Version,
-    val moveLearnMethod: MoveLearnMethod
+    val level_learned_at: Int,
+    val version_group: VersionGroup,
+    val move_learn_method: MoveLearnMethod
+)
+
+data class VersionGroup(
+    val name: String,
+    val url: String
 )
 
 data class MoveLearnMethod(
@@ -84,118 +103,87 @@ data class MoveLearnMethod(
     val url: String
 )
 
+// Especie del Pokémon
 data class Species(
     val name: String,
     val url: String
 )
 
+// Sprites o imágenes del Pokémon
 data class Sprites(
-    val backDefault: String,
-    //val backFemale: String,
-    //val backShiny: String,
-    //val backShinyFemale: String,
-    //val frontDefault: String,
-    //val frontFemale: String,
-    //val frontShiny: String,
-    //val frontShinyFemale: String,
-    //val other: OtherSprites,
-    //val versions: VersionsSprites
+    val back_default: String?,
+    val back_female: String?,
+    val back_shiny: String?,
+    val back_shiny_female: String?,
+    val front_default: String?,
+    val front_female: String?,
+    val front_shiny: String?,
+    val front_shiny_female: String?,
+    val other: OtherSprites
 )
 
 data class OtherSprites(
-    val dreamWorld: DreamWorld,
-    val home: Home,
-    val officialArtwork: OfficialArtwork,
-    val showdown: Showdown
+    val dream_world: DreamWorldSprites,
+    val home: HomeSprites,
+    val official_artwork: OfficialArtworkSprites,
+    val showdown: ShowdownSprites
 )
 
-data class DreamWorld(
-    val frontDefault: String?,
-    val frontFemale: String?
+data class DreamWorldSprites(
+    val front_default: String?,
+    val front_female: String?
 )
 
-data class Home(
-    val frontDefault: String?,
-    val frontFemale: String?,
-    val frontShiny: String?,
-    val frontShinyFemale: String?
+data class HomeSprites(
+    val front_default: String?,
+    val front_female: String?,
+    val front_shiny: String?,
+    val front_shiny_female: String?
 )
 
-data class OfficialArtwork(
-    val frontDefault: String?,
-    val frontShiny: String?
+data class OfficialArtworkSprites(
+    val front_default: String?,
+    val front_shiny: String?
 )
 
-data class Showdown(
-    val backDefault: String?,
-    val backFemale: String?,
-    val backShiny: String?,
-    val backShinyFemale: String?,
-    val frontDefault: String?,
-    val frontFemale: String?,
-    val frontShiny: String?,
-    val frontShinyFemale: String?
+data class ShowdownSprites(
+    val back_default: String?,
+    val back_female: String?,
+    val back_shiny: String?,
+    val back_shiny_female: String?,
+    val front_default: String?,
+    val front_female: String?,
+    val front_shiny: String?,
+    val front_shiny_female: String?
 )
 
-data class VersionsSprites(
-    val generationI: GenerationSprites,
-    val generationII: GenerationSprites,
-    val generationIII: GenerationSprites,
-    val generationIV: GenerationSprites,
-    val generationV: GenerationSprites,
-    val generationVI: GenerationSprites,
-    val generationVII: GenerationSprites,
-    val generationVIII: GenerationSprites
-)
-
-data class GenerationSprites(
-    val redBlue: RedBlue?,
-    val yellow: Yellow?
-)
-
-data class RedBlue(
-    val backDefault: String?,
-    val backGray: String?,
-    val frontDefault: String?,
-    val frontGray: String?
-)
-
-data class Yellow(
-    val backDefault: String?,
-    val backGray: String?,
-    val frontDefault: String?,
-    val frontGray: String?
-)
-
-data class Cries(
-    val latest: String,
-    val legacy: String
+// Estadísticas del Pokémon
+data class StatSlot(
+    val base_stat: Int,
+    val effort: Int,
+    val stat: Stat
 )
 
 data class Stat(
-    val baseStat: Int,
-    val effort: Int,
-    val stat: StatDetail
-)
-
-data class StatDetail(
     val name: String,
     val url: String
+)
+
+// Tipos del Pokémon
+data class TypeSlot(
+    val slot: Int,
+    val type: Type
 )
 
 data class Type(
-    val slot: Int,
-    val type: TypeDetail
-)
-
-data class TypeDetail(
     val name: String,
     val url: String
 )
 
+// Tipos pasados del Pokémon (de generaciones anteriores)
 data class PastType(
     val generation: Generation,
-    val types: List<Type>
+    val types: List<TypeSlot>
 )
 
 data class Generation(
