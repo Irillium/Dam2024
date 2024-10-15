@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import edu.iesam.dam2024.databinding.FragmentSuperheroListBinding
 import edu.iesam.dam2024.feature.superheros.domain.Superhero
 
@@ -17,6 +18,11 @@ class SuperheroListFragment : Fragment() {
 
     private var _binding: FragmentSuperheroListBinding? = null
     private val binding get() = _binding!!
+
+    private val superheroAdapter = SuperheroAdapter { id ->
+        navigateToDetail(id)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +37,9 @@ class SuperheroListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         factory = SuperheroFactory(requireContext())
         viewModel = factory.buildSuperheroListViewModel()
-        setubObserver()
+        setupObserver()
+        setupView()
+
         viewModel.loadSuperheroes()
     }
 
@@ -39,7 +47,7 @@ class SuperheroListFragment : Fragment() {
         super.onDestroyView()
         _binding=null
     }
-    private fun setubObserver() {
+    private fun setupObserver() {
         val observer = Observer<SuperheroListViewModel.UiState> { uiState ->
             uiState.superheroes?.let { superheroes ->
                 bindData(superheroes)
@@ -59,34 +67,25 @@ class SuperheroListFragment : Fragment() {
     }
 
     private fun bindData(heroes: List<Superhero>) {
+        superheroAdapter.submitList(heroes)
+
+    }
+    private fun setupView(){
+
         binding.apply {
-            hero1.apply {
-                text = heroes[0].name
-                setOnClickListener {
-                    navigateToDetail(heroes[0].id)
-                }
-                hero2.apply {
-                    text = heroes[1].name
-                    setOnClickListener {
-                        navigateToDetail(heroes[1].id)
-                    }
-                }
-                hero3.apply {
-                    text = heroes[2].name
-                    setOnClickListener {
-                        navigateToDetail(heroes[2].id)
-                    }
-                }
+            list.layoutManager= LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+            list.adapter = superheroAdapter
 
-            }
         }
-
-
     }
     fun navigateToDetail(id: String) {
         findNavController().navigate(
             SuperheroListFragmentDirections.actionFromSuperheroToSuperheroDetail(id)
         )
-
     }
+
 }
