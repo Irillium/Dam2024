@@ -30,4 +30,8 @@ class PokemonDataRepository(
         }
         return localPokemon
     }
+
+    override suspend fun getNextPokemons(offset: Int):List<Pokemon> {
+        return remote.getNextPokemons(offset)
+    }
 }

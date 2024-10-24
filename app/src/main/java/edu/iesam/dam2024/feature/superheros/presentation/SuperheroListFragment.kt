@@ -87,6 +87,5 @@ class SuperheroListFragment : Fragment() {
         findNavController().navigate(
             SuperheroListFragmentDirections.actionFromSuperheroToSuperheroDetail(id)
         )
-
     }
 }

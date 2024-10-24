@@ -7,6 +7,7 @@ import edu.iesam.dam2024.feature.pokemons.domain.Pokemon
 class PokemonAPIDataSource {
 
     private val apiService = PokemonClient().apiService
+    private val limit=20
 
      suspend fun getPokemons(): List<Pokemon> {
          return try {
@@ -22,7 +23,18 @@ class PokemonAPIDataSource {
              emptyList()
          }
     }
-
+    suspend fun getNextPokemons(offset:Int):List<Pokemon>{
+        return try {
+            val response = apiService.getNextPokemons(limit,offset)
+            response.results.map { result ->
+                val pokemonDetails = apiService.getPokemonById(result.url.split("/").dropLast(1).last()) // Extraer ID de la URL
+                pokemonDetails
+            }
+        } catch (e: Exception) {
+            Log.e("PokemonAPIDataSource", "Error fetching Pokemons", e)
+            emptyList()
+        }
+    }
     suspend fun getPokemon(id: String): Pokemon? {
         return try {
             apiService.getPokemonById(id)
