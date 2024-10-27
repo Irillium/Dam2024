@@ -31,8 +31,10 @@ class PokemonListViewModel(private val getPokemonsUseCase: GetPokemonsUseCase,
         }
     }
     fun loadNextPokemons(){
+
         offset+=20
         viewModelScope.launch(Dispatchers.IO) {
+            _uiState.postValue(UiState(isLoading = true))
             val nextPokemons = getNextPokemonsUseCase.invoke(offset)
 
             if(nextPokemons.isNotEmpty()){
@@ -42,7 +44,9 @@ class PokemonListViewModel(private val getPokemonsUseCase: GetPokemonsUseCase,
                     _uiState.value = UiState(pokemons = currentPokemonList)
                 }
             }
+            _uiState.postValue(UiState(isLoading = false))
         }
+
     }
 
     data class UiState(

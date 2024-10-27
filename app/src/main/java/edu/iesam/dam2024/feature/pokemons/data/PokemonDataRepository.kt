@@ -11,24 +11,26 @@ class PokemonDataRepository(
     private val local : PokemonXmlLocalDataSource ):PokemonRepository {
 
     override suspend fun getPokemos(): List<Pokemon> {
-        val pokemonsFromLocal = local.findAll()
+        return remote.getPokemons()
+       /* val pokemonsFromLocal = local.findAll()
         if(pokemonsFromLocal.isEmpty()){
             val pokemonsFromRemote = remote.getPokemons()
             local.saveAll(pokemonsFromRemote)
             return pokemonsFromRemote
         }
-        return pokemonsFromLocal
+        return pokemonsFromLocal*/
     }
 
     override suspend fun getPokemon(id: String): Pokemon? {
-       val localPokemon = local.findById(id)
+       return  remote.getPokemon(id)
+        /*val localPokemon = local.findById(id)
         if (localPokemon == null){
             remote.getPokemon(id)?.let {
                 local.save(it)
                 return it
             }
         }
-        return localPokemon
+        return localPokemon*/
     }
 
     override suspend fun getNextPokemons(offset: Int):List<Pokemon> {

@@ -49,6 +49,7 @@ class PokemonListFragment:Fragment(){
     fun setupObserver(){
         val observer = Observer <PokemonListViewModel.UiState> { uiState ->
             uiState.pokemons?.let { pokemons ->
+                Log.d("@dev","Pintaaaaaaaaaa")
                 bindData(pokemons)
             }
             uiState.errorApp?.let {
@@ -57,9 +58,11 @@ class PokemonListFragment:Fragment(){
                 //oculto el error
             }
             if (uiState.isLoading) {
-                //muestro cargando
+                Log.d("@dev","Cargar")
+                binding.carga.visibility = View.VISIBLE
             } else {
-                //
+                Log.d("@dev","Dejar de cargar")
+                binding.carga.visibility = View.GONE
             }
         }
         viewModel.uiState.observe(viewLifecycleOwner, observer)
@@ -92,6 +95,7 @@ class PokemonListFragment:Fragment(){
             )
             list.adapter = pokemonAdapter
         }
+
     }
 
     fun navigateToDetail(id: String) {
