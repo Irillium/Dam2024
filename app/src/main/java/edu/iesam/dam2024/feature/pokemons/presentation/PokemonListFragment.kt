@@ -22,7 +22,7 @@ class PokemonListFragment:Fragment(){
     private var _binding: FragmentPokemonListBinding? = null
     private val binding get() = _binding!!
 
-    private val pokemonAdapter=PokemonAdapter{
+    private val pokemonAdapter=PokemonAdapter(emptyList()){
         id -> navigateToDetail(id)
     }
 
@@ -51,6 +51,7 @@ class PokemonListFragment:Fragment(){
             uiState.pokemons?.let { pokemons ->
                 Log.d("@dev","Pintaaaaaaaaaa")
                 bindData(pokemons)
+                pokemonAdapter.updateData(pokemons)
             }
             uiState.errorApp?.let {
                 //Pinto el erros

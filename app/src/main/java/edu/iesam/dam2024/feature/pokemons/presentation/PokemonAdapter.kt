@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import edu.iesam.dam2024.R
 import edu.iesam.dam2024.feature.pokemons.domain.Pokemon
 
-class PokemonAdapter (private val navigateToDetail: (String) -> Unit):
+class PokemonAdapter (private var pokemons: List<Pokemon>,private val navigateToDetail: (String) -> Unit):
 ListAdapter<Pokemon,PokemonViewHolder>(PokemonDiffUtil())
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
@@ -18,4 +18,10 @@ ListAdapter<Pokemon,PokemonViewHolder>(PokemonDiffUtil())
        holder.bind(currentList[position])
     }
 
+    fun updateData(newPokemons: List<Pokemon>) {
+        val updatedList = pokemons.toMutableList()
+        updatedList.addAll(newPokemons)
+        pokemons = updatedList
+        notifyDataSetChanged()
+    }
 }
