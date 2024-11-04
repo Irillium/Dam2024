@@ -2,11 +2,12 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.navigation.safeargs.kotlin)
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace = "edu.iesam.dam2024"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "edu.iesam.dam2024"
@@ -37,6 +38,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    ksp{
+        arg("KOIN_KONFIG_CHECK","true")
+    }
 }
 
 dependencies {
@@ -51,6 +55,15 @@ dependencies {
     implementation(libs.nav.ui)
     implementation(libs.nav.fragment)
     api(libs.nav.fragment.ktx)
+
+    //koin
+    implementation(project.dependencies.platform(libs.koin.bom))
+    implementation(libs.koin.android)
+    implementation(libs.koin.annotations)
+
+    //KSP
+    implementation(libs.koin.ksp)
+
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.11.0")

@@ -9,10 +9,14 @@ class SuperheroAPIDataSource : RemoteDataSource{
     private val apiService = ApiClient().apiService
 
     override suspend fun getSuperheros(): List<Superhero> {
-        return try{
-            apiService.getSuperheroes()
-        }catch (e: Exception){
-            emptyList()
+        val response = apiService.requestSuperHeroes()
+        if (response.isSuccessful){
+            return response.body()!!.map {
+                it.toModel()
+            }
+        } else {
+            //Hay un error
+            return emptyList()
         }
     }
 

@@ -9,7 +9,9 @@ import edu.iesam.dam2024.feature.movies.domain.GetMoviesUseCase
 import edu.iesam.dam2024.feature.movies.domain.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class MoviesViewModel(private val getMoviesUseCase: GetMoviesUseCase):ViewModel() {
 
     private val _uiStrate= MutableLiveData<UiState>()
