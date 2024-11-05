@@ -68,7 +68,8 @@ dependencies {
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-    
+    //okhttp interceptors
+    implementation(libs.okhttp.log.interceptor)
     //librerias para testing
     testImplementation(libs.junit)
     //librerias para Android-testing(test que hagan referencia al sdk de android)
