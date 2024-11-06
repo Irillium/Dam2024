@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import edu.iesam.dam2024.databinding.FragmentPokemonListBinding
 import edu.iesam.dam2024.feature.pokemons.domain.Pokemon
 
@@ -18,6 +19,10 @@ class PokemonListFragment:Fragment(){
 
     private var _binding: FragmentPokemonListBinding? = null
     private val binding get() = _binding!!
+
+    private val pokemonAdapter=PokemonAdapter{
+        id -> navigateToDetail(id)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,12 +37,13 @@ class PokemonListFragment:Fragment(){
         super.onViewCreated(view, savedInstanceState)
         factory = PokemonFactory(requireContext())
         viewModel = factory.buildPokemonListViewModel()
-        setubObserver()
+        setupObserver()
+        setupView()
         viewModel.loadPokemons()
 
     }
 
-    fun setubObserver(){
+    fun setupObserver(){
         val observer = Observer <PokemonListViewModel.UiState> { uiState ->
             uiState.pokemons?.let { pokemons ->
                 bindData(pokemons)
@@ -57,43 +63,22 @@ class PokemonListFragment:Fragment(){
     }
 
     fun bindData(pokemons:List<Pokemon>){
-        binding.apply {
-            pokemon1.apply {
-                text=pokemons[0].name
-                setOnClickListener(){
-                    navigateToDetail(pokemons[0].name)
-                }
-            }
-            pokemon2.apply {
-                text=pokemons[1].name
-                setOnClickListener(){
-                    navigateToDetail(pokemons[1].name)
-                }
-            }
-            pokemon3.apply {
-                text=pokemons[2].name
-                setOnClickListener(){
-                    navigateToDetail(pokemons[2].name)
-                }
-            }
-            pokemon4.apply {
-                text=pokemons[3].name
-                setOnClickListener(){
-                    navigateToDetail(pokemons[3].name)
-                }
-            }
-            pokemon5.apply {
-                text=pokemons[4].name
-                setOnClickListener(){
-                    navigateToDetail(pokemons[4].name)
-                }
-            }
-        }
-
+        pokemonAdapter.submitList(pokemons)
     }
-    fun navigateToDetail(name: String) {
+    private fun setupView() {
+        binding.apply {
+            list.layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+            list.adapter = pokemonAdapter
+        }
+    }
+
+    fun navigateToDetail(id: String) {
         findNavController().navigate(
-            PokemonListFragmentDirections.actionFromPokemonToPokemonDetail(name)
+            PokemonListFragmentDirections.actionFromPokemonToPokemonDetail(id)
         )
     }
 }
